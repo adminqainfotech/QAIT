@@ -1,0 +1,5 @@
+baseURL: "https://hbstest.service-now.com"
+loginPage:
+ validUsername: "amathur@hbs.edu"
+ validPassword: "Miped44%"
+ serviceNowSignInMessage: "You need an HBS account to continue."
