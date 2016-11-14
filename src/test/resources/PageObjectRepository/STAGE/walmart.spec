@@ -11,7 +11,7 @@ signIn						id		signIn
 NewMessage			xpath		//span[contains(text(),'New Message')]
 messageText			xpath		//input[@name='messageText']
 Selectapp			xpath		//md-select[@aria-label='Select app']
-AppID				xpath		//span[text()='com.qait.myapplication']
+#AppID				xpath		//span[text()='com.qait.myapplication']
 onSendMessage		xpath		//button[@ng-click='controller.onSendMessage()']
 controllerConfirm	xpath		//button[@ng-click='controller.confirm()']/span
 
