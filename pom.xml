@@ -12,11 +12,18 @@
 	</properties>
 
 	<dependencies>
-	<dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
-            <version>4.5.2</version>
-        </dependency>
+		<dependency>
+			<groupId>com.saucelabs</groupId>
+			<artifactId>sauce_junit</artifactId>
+			<version>2.1.18</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.5.2</version>
+		</dependency>
 		<dependency>
 			<groupId>io.appium</groupId>
 			<artifactId>java-client</artifactId>
@@ -96,11 +103,11 @@
 			<artifactId>commons-configuration</artifactId>
 			<version>1.6</version>
 		</dependency>
-        <dependency>
-            <groupId>org.testobject</groupId>
-            <artifactId>testobject-java-api</artifactId>
-            <version>0.0.25</version>
-        </dependency>
+		<dependency>
+			<groupId>org.testobject</groupId>
+			<artifactId>testobject-java-api</artifactId>
+			<version>0.0.25</version>
+		</dependency>
 	</dependencies>
 
 	<build>

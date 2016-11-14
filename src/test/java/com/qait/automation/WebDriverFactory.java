@@ -60,9 +60,9 @@ public class WebDriverFactory {
 					|| (browser.equalsIgnoreCase("internet explorer"))) {
 				return getInternetExplorerDriver(ieDriverPath);
 			}
-			else if (browser.equalsIgnoreCase("mobile")||browser.equalsIgnoreCase("cloud") && seleniumconfig.get("ostype").equalsIgnoreCase("ios")) {
-				return  setupIosDriver(seleniumconfig);
-			} else if (browser.equalsIgnoreCase("mobile")||browser.equalsIgnoreCase("cloud") && seleniumconfig.get("ostype").equalsIgnoreCase("android")) {
+			else if ((browser.equalsIgnoreCase("mobile")||browser.equalsIgnoreCase("cloud")) && seleniumconfig.get("ostype").equalsIgnoreCase("ios")) {
+				//	return  setupIosDriver(seleniumconfig);
+			} else if ((browser.equalsIgnoreCase("mobile")||browser.equalsIgnoreCase("cloud")) && seleniumconfig.get("ostype").equalsIgnoreCase("Android")) {
 				return setMobileAndroidDriver(seleniumconfig);
 			}
 
@@ -169,7 +169,6 @@ public class WebDriverFactory {
 		System.out.println("Mobile driver initialization started . . . ...");
 		if (browser.equalsIgnoreCase("cloud")) {
 			DesiredCapabilities capabilities = new DesiredCapabilities();
-
 			capabilities.setCapability("testobject_api_key", "6F5AFF19DA52459496C844ADE6DD565D");
 			capabilities.setCapability("testobject_app_id", "2");
 			capabilities.setCapability("testobject_device", "Motorola_Moto_E_2nd_gen_free");
@@ -181,6 +180,13 @@ public class WebDriverFactory {
 			System.out.println("Test report: " + driverAndroid.getCapabilities().getCapability("testobject_test_report_url"));
 			return driver;
 		}else {
+
+			System.out.println();
+			String USERNAME = "tarundwi2008";
+			String ACCESS_KEY = "be92b8c5-183e-4cbc-b3d0-9b6e32d3444d";
+			String URL = "https://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:443/wd/hub";
+			System.out.println(URL);
+
 			File classpathRoot = new File(System.getProperty("user.dir"));
 			String tier = getProperty("tier").toUpperCase();
 			File appDir = new File(classpathRoot, "app/"+tier+"/");
@@ -193,28 +199,33 @@ public class WebDriverFactory {
 
 			//	 capabilities.setCapability("udid", devices);
 			//		capabilities.setCapability("platformVersion", platformVersion);
-			cap.setCapability("deviceName", "Android");
+			cap.setCapability("deviceName", "Samsung Galaxy S4 Emulator");
 			cap.setCapability("platformName", "Android");
 			cap.setCapability("--session-override",true);
-			cap.setCapability("app", appPath);
-			cap.setCapability(CapabilityType.VERSION, "5.0.2");
+			cap.setCapability("deviceOrientation", "portrait");
+			cap.setCapability("app", "sauce-storage:QAIT_Demo-debug.apk");
+			cap.setCapability(CapabilityType.VERSION, "4.4");
+		cap.setCapability("browserName", "");
+
 			capabilities.setCapability("noReset",true);
-			//		cap.setCapability("browserName", "Chrome");
+			cap.setCapability("appium-version","1.5.3");
 			//		capabilities.setCapability("chrome.switches", Arrays.asList("--incognito"));
 			String appiumServerHostUrl = selConfig.get("appiumServer");
 			URL appiumServerHost = null;
 			try {
-				appiumServerHost = new URL(appiumServerHostUrl);
+				appiumServerHost = new URL(URL);
 			} catch (MalformedURLException e) {
 				e.printStackTrace();
 			}
 			cap.setJavascriptEnabled(true);
-			System.out.println(appiumServerHostUrl);
+			System.out.println("host url:"+appiumServerHost);
 			AndroidDriver driverAndroid = new AndroidDriver(appiumServerHost, cap);
+	//		System.out.println(driverAndroid.getSessionDetails());
 			WebDriver driver = driverAndroid;
 			return driver;
 		}
 	}
+
 
 	public WebDriver setMobileAndroidDriver(Map<String, String> selConfig, String devicesName,
 			String port) {
